@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros dinámicos</title>
+</head>
+<style>
+    .item {
+        display: inline-block;
+        margin: 10px;
+        padding: 20px;
+        background-color: #c1ebd8;
+        border: 1px solid #1a0d0d;
+        border-radius: 5px;
+        width: 200px;
+    }
+
+    .item h3 {
+        color: #066e09;
+    }
+
+    .item p {
+        color: #151010;
+    }
+
+    .item button {
+        margin-top: 10px;
+        background-color: #d10a0a;
+        color: white;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .item button:hover {
+        background-color: #c0392b;
+    }
+</style>
+<body>
+
+    <h1>Registros</h1>
+
+    
+    <form id="formulario">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="descripcion" placeholder="Descripción" required>
+        <button type="submit">Catálogo</button>
+    </form>
+
+    <div id="catalogo">
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        
+        document.getElementById('formulario').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            var nombre = document.getElementById('nombre').value;
+            var descripcion = document.getElementById('descripcion').value;
+
+            var itemDiv = document.createElement('div');
+            itemDiv.classList.add('item');
+
+            var itemName = document.createElement('h3');
+            itemName.textContent = nombre;
+
+            var itemDescription = document.createElement('p');
+            itemDescription.textContent = descripcion;
+
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.onclick = function() {
+                itemDiv.remove();
+            };
+
+            itemDiv.appendChild(itemName);
+            itemDiv.appendChild(itemDescription);
+            itemDiv.appendChild(deleteButton);
+
+            var catalogo = document.getElementById('catalogo');
+            catalogo.appendChild(itemDiv);
+
+            document.getElementById('nombre').value = '';
+            document.getElementById('descripcion').value = '';
+        });
+    </script>
+
+</body>
+</html>
